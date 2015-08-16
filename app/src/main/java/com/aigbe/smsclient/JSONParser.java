@@ -1,7 +1,7 @@
 package com.aigbe.smsclient;
 
 /**
- * Created by eausaig on 8/10/2015.
+ * Created by Austin Aigbe on 8/10/2015.
  */
 import java.io.BufferedReader;
 import java.io.IOException;
