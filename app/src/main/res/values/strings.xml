@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Ad Client</string>
+    <string name="action_settings">Settings</string>
+    <string name="ad_server_settings">Ad Server Settings</string>
+    <string name="ad_server_ip">Ad Server IP:</string>
+    <string name="ad_server_ip_summary">IP address of the Ad Server</string>
+    <string name="ad_server_port_summary">Ad Server port, default is 8080</string>
+    <string name="ad_server_port">Port:</string>
+    <string name="dial_button">Dial</string>
+    <string name="location">Location</string>
+    <string name="user_location">Select your location (City)</string>
+
+    <string-array name="cities">
+        <item name="3">Lagos</item>
+        <item name="2">Ibadan</item>
+        <item name="4">PH</item>
+        <item name="0">Aba</item>
+        <item name="1">Abuja</item>
+    </string-array>
+
+</resources>
