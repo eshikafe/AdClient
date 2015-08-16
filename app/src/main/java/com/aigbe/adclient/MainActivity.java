@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
                     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
                     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
                     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-    //final AsyncTask<String, String, String> asyncAdvert = new GetAdvert();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
                     Toast.makeText(getApplicationContext(), "UNKNOWN APPLICATION. Dial *111#", Toast.LENGTH_SHORT).show();
                 }else{
                     getSettings();
-                    //timeHandler.sendEmptyMessageDelayed(1, TIME_OUT);
                     new GetAdvert().execute();
                 }
             }
@@ -130,7 +128,6 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
                 break;
         }
     }
-
 
     // Connect to the Ad Server and retrieve the advert
     class GetAdvert extends AsyncTask<String, String, String> {
