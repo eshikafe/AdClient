@@ -1,4 +1,4 @@
-package com.aigbe.smsclient;
+package com.aigbe.adclient;
 
 /**
  * Created by Austin Aigbe on 8/9/2015.

@@ -1,13 +1,8 @@
-package com.aigbe.smsclient;
+package com.aigbe.adclient;
 
 /**
  * Created by Austin Aigbe on 8/9/2015.
  */
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,12 +10,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
     String m, advert ="";
     ImageButton dialButton;
     EditText shortCodeText;
-    String msg = "Hello, your monthly credit limit is 30000.\nYou have N14778.56 available to use for the month. Thank you.\n";
+    String msg = "Hello, your monthly credit limit is 30000.\nYou have N14778.56 available to use for the month.Thank you.\n";
 
     public static final String REGEX_IP_ADDRESS =
             "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
 
         info = (TextView) findViewById(R.id.textView);
         TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        imsi = mTelephonyMgr.getSubscriberId(); // imsi
+        imsi = mTelephonyMgr.getSubscriberId();
 
         dialButton = (ImageButton) findViewById(R.id.dial);
         shortCodeText = (EditText) findViewById(R.id.editText);
@@ -79,6 +77,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
                     Toast.makeText(getApplicationContext(), "UNKNOWN APPLICATION. Dial *111#", Toast.LENGTH_SHORT).show();
                 }else{
                     getSettings();
+                    //timeHandler.sendEmptyMessageDelayed(1, TIME_OUT);
                     new GetAdvert().execute();
                 }
             }
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
         switch (requestCode) {
             case 1:
                 getSettings();
+                //info.setText(URL);
                 break;
         }
     }
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
             params.add(new BasicNameValuePair("imsi", imsi));
             params.add(new BasicNameValuePair("location", location));
             // getting JSON string from URL
-            //URL = "https://api.github.com/users/mralexgray/repo";
+            //URL = "https://api.github.com/users/mralexgray/repo"; // for testing
             JSONObject json = jParser.makeHttpRequest(URL, "GET", params);
 
             if (json == null) {
@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity { // lollipop compatible
                     alert.setMessage(msg + advert);
                     alert.setPositiveButton("OK", null);
                     alert.show();
+                    //info.setText(msg + advert);
                 }
             });
 

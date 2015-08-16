@@ -1,14 +1,10 @@
-package com.aigbe.smsclient;
+package com.aigbe.adclient;
 
 /**
  * Created by Austin Aigbe on 8/10/2015.
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
+
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,11 +14,19 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class JSONParser {
 
@@ -56,8 +60,14 @@ public class JSONParser {
                 is = httpEntity.getContent();
 
             }else if(method == "GET"){
-                // request method is GET
+
                 DefaultHttpClient httpClient = new DefaultHttpClient();
+                // request method is GET
+                HttpParams httpParameters = httpClient.getParams();
+                HttpConnectionParams.setConnectionTimeout(httpParameters, 10000);
+                HttpConnectionParams.setSoTimeout(httpParameters, 10000);
+                ConnManagerParams.setTimeout(httpParameters, 10000);
+
                 String paramString = URLEncodedUtils.format(params, "utf-8");
                 url += "?" + paramString;
                 HttpGet httpGet = new HttpGet(url);
@@ -68,10 +78,13 @@ public class JSONParser {
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            return null;
         } catch (ClientProtocolException e) {
             e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
 
         try {
